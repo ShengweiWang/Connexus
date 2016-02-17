@@ -4,6 +4,7 @@ import urllib
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
+
 import webapp2
 
 class MainPage(webapp2.RequestHandler):
@@ -12,7 +13,7 @@ class MainPage(webapp2.RequestHandler):
 
 
         self.response.out.write("""
-              <form action="/manage.py" method="get">
+              <form action="/manage">
                 <div>
                   ID:
                   <input type="text" name="userid"></input>
@@ -28,5 +29,5 @@ class MainPage(webapp2.RequestHandler):
             </body>
           </html>""")
 
-app = webapp2.WSGIApplication([('/', MainPage)],
+app = webapp2.WSGIApplication([('/', MainPage),('/index.html',MainPage)],
                               debug=True)
