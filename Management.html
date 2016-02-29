@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+< lang="en">
+<title>Connexus</title>
+<head>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body class="" id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+  <div class="container_12">
+    <div class="grid_12">
+      <h1 class="logo">
+        <a href="/">
+          CONNEX.us
+          <span>Share the world!</span>
+        </a>
+      </h1>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <section id="stuck_container">
+  <!--==============================
+              Stuck menu
+  =================================-->
+    <div class="container_12">
+        <div class="grid_12">          
+          <div class="navigation">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="/manage">Manage</a></li>
+               <li><a href="/createstream">Create</a></li>
+               <li><a href="/view">View</a></li>
+               <li><a href="/search">Search</a></li>
+               <li><a href="/Trending">Trending</a></li>
+               <li><a href="/social">Social</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>       
+         <div class="clear"></div>  
+     </div> 
+     <div class="clear"></div>
+    </div> 
+  </section>
+</header>
+
+</body>
+<body>
+<!---
+<center>
+    <form action="/search?search={{ search }}" method="get">
+        <div><input id="searchnames" type="text" name="searchfield" style="width:500px" value=""></div>
+        <table id= "sug" bgcolor="#FFFFFF" style="width:500px;border:1;text-align: left;">
+            <tbody style="color:black;font-family:'Arial';font-size: small"></tbody>
+        </table>
+        <div><input id="search" type="submit" value="Search"></div>
+    </form>
+</center>
+</body>
+--->
+<body>
+    <br><hr><br>
+<center>
+
+<p align="center" style="color:white;font-size:150%">Stream I own</p>
+
+<form method="post" action="/delete">
+    <table style="width:50%;color:white" align="center">
+        <!--<caption align="left">Stream I own</caption>-->
+        <tr>
+        <th style="border:0;">Name</th>
+        <th>Last New Pictures</th>
+        <th>Number of Pictures</th>
+        <th>Delete</th>
+        </tr>
+        {% for stream in own_stream %}
+            <tr>
+            <td style="border:0;"> <a href ="/singlestream?stream_name={{stream.stream_id}}" >{{stream.stream_id}}</a></td>
+            <td>{{stream.last_add}}</td>
+            <td>{{stream.numberofpic}}</td>
+            <td><input type="checkbox" name="delete" value = "{{stream.stream_id}}"> </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div><input id="delete" type="submit" value="Deleted Checked Streams"></div>
+</form>
+<br>
+<br>
+<p align="center" style="color:white;font-size:150%">Stream I subscribe to</p>
+<form method="post" action="/unsub">
+    <table style="width:50%;color:white" align="center">
+        <!--<caption align="left">Stream I own</caption>-->
+        <tr>
+        <th style="border:0;">Name</th>
+        <th>Last New Pictures</th>
+        <th>Number of Pictures</th>
+        <th>Views</th>
+        <th>Delete</th>
+        </tr>
+        {% for stream in sub_stream %}
+            <tr>
+            <td style="border:0;"> <a href ="/singlestream?stream_name={{stream.stream_id}}" >{{stream.stream_id}}</a></td>
+            <td>{{stream.last_add}}</td>
+            <td>{{stream.numberofpic}}</td>
+            <td>{{stream.numview}}</td>
+            <td><input type="checkbox" name="unsubscribe" value = "{{stream.stream_id}}"> <br></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div><input id="unsub" type="submit" value="Unsubscribe Checked Streams"></div>
+</form>
+    <br><br><br><a style="color:blue" href="{{ url|safe }}">{{ url_linktext }}</a>
+</center>
+</body>
+  <!--
+  <script>
+    var stname = '{{streamnames}}';
+    stname.toString();
+    var st1=stname.split('[').join("");
+    var st2=st1.split(']').join("");
+    var st3=st2.replace(/&#34;/g, "");
+    var streamname=st3.split(',');
+    var text;
+    var i;
+    var ent;
+    var patt;
+    $("#searchnames").keyup(function(){
+        $("#sug > tbody").empty();
+        text="";
+        ent = $("#searchnames").val();
+        patt=new RegExp(ent,"i");
+        if (ent != ""){
+            for(i=0;i < streamname.length;i++){
+                if(streamname[i].search(patt) != -1){
+                    $("#sug > tbody").append("<tr><td>"+streamname[i].trim()+"</td></tr>");
+                }
+            }
+        }
+        $("#sug").find("td").css("text-align","left");
+        $("#sug").find("td").on({
+        mouseenter: function(){
+            $(this).css("background-color", "lightgray");
+        },
+        mouseleave: function(){
+            $(this).css("background-color", "white");
+        },
+        click: function(){
+            window.location.href="/search?searchfield="+$(this).html();
+        }
+    });
+    });
+          $("#delete").click(function(){
+        toastr.info('Delete Streams Success!')
+    });
+          $("#unsub").click(function(){
+        toastr.info('Unsubscribe Streams Success!')
+    });
+  </script>
+  -->
+</html>

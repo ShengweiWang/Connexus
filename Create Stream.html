@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<title>Connexus</title>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<body class="" id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+  <div class="container_12">
+    <div class="grid_12">
+      <h1 class="logo">
+        <a href="/">
+          CONNEX.us
+          <span>Share the world!</span>
+        </a>
+      </h1>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <section id="stuck_container">
+  <!--==============================
+              Stuck menu
+  =================================-->
+    <div class="container_12">
+        <div class="grid_12">
+          <div class="navigation">
+            <nav>
+              <ul class="sf-menu">
+               <li><a href="/manage">Manage</a></li>
+               <li class="current"><a href="/createstream">Create</a></li>
+               <li><a href="/view">View</a></li>
+               <li><a href="/search">Search</a></li>
+               <li><a href="/Trending">Trending</a></li>
+               <li><a href="/social">Social</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+         <div class="clear"></div>
+     </div>
+     <div class="clear"></div>
+    </div>
+  </section>
+</header>
+
+</body>
+<!--------------------------------search--------------------------->
+<body><center>
+    <form action="/search?search={{ search }}" method="get">
+        <div><input id="searchnames" type="text" name="searchfield" style="width:500px" value=""></div>
+        <table id= "sug" bgcolor="#FFFFFF" style="width:500px;border:1;text-align: left;">
+            <tbody style="color:black;font-family:'Arial';font-size: small" ></tbody>
+        </table>
+        <div><input id="search" type="submit" value="Search"></div>
+    </form>
+</center></body>
+
+  <body>
+    <br><hr><br>
+    <form action="/createstreamsign?" method="post" style="color:white">
+        <table style="width:100%;border:0;">
+            <tr>
+                <td valign="bottom" style="border:0">
+                    <!--<textarea name="name" placeholder="lalal" rows="1" cols="60"></textarea>-->
+                    <form><input name="name" style="width: 500px"></form>
+                    <div>Name your stream</div>
+                </td>
+                <td>
+                     <form><input name="tag" style="width: 500px;height: 60px "></form>
+                     <div>Tag your stream</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                     <input name="subscriber" value="Add subscriber emails" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue; this.style.color='#999'}" style="width: 500px;height: 60px;color:#999"><br>
+                     <input name="invite_message" value="Add invite massage" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue; this.style.color='#999'}" style="width: 500px;height: 60px;color:#999">
+                     <div>Add subscriber</div>
+                </td>
+                <td valign="bottom">
+                    <br>
+                    <form><input name="cover_image" style="width: 500px;"></form>
+                    <div>URL to cover image</div>
+                </td>
+            </tr>
+        </table>
+
+        <div align="center" ><input id="create" type="submit" value="Create stream"></div><br><br><br>
+    </form>
+
+
+    <br><br><br><a style="color:blue;position: absolute; top: 720px; left:730px;" href="{{ url|safe }}">{{ url_linktext }}</a>
+
+  </body>
+<script>
+    var stname = '{{streamnames}}';
+    stname.toString();
+    var st1=stname.split('[').join("");
+    var st2=st1.split(']').join("");
+    var st3=st2.replace(/&#34;/g, "");
+    var streamname=st3.split(',');
+    var text;
+    var i;
+     var ent;
+    var patt;
+    $("#searchnames").keyup(function(){
+        $("#sug > tbody").empty();
+        text="";
+        ent = $("#searchnames").val();
+        patt=new RegExp(ent,"i");
+        if (ent != ""){
+            for(i=0;i < streamname.length;i++){
+                if(streamname[i].search(patt) != -1){
+                    $("#sug > tbody").append("<tr><td>"+streamname[i].trim()+"</td></tr>");
+                }
+            }
+        }
+        $("#sug").find("td").css("text-align","left");
+        $("#sug").find("td").on({
+        mouseenter: function(){
+            $(this).css("background-color", "lightgray");
+        },
+        mouseleave: function(){
+            $(this).css("background-color", "white");
+        },
+        click: function(){
+            window.location.href="/search?searchfield="+$(this).html();
+        }
+    });
+    });
+
+        $("#create").click(function(){
+        toastr.info('Stream Create Success!')
+    });
+  </script>
+</html>

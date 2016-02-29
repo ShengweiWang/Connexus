@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% autoescape true %}
+
+<html lang="en">
+<head>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="" id="top">
+<header>
+  <div class="container_12">
+    <div class="grid_12">
+      <h1 class="logo">
+        <a href="/">
+          CONNEX.us
+          <span>Share the world!</span>
+        </a>
+      </h1>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <section id="stuck_container">
+  <!--==============================
+              Stuck menu
+  =================================-->
+    <div class="container_12">
+        <div class="grid_12">
+          <div class="navigation">
+            <nav>
+              <ul class="sf-menu">
+               <li><a href="/manage">Manage</a></li>
+               <li><a href="/createstream">Create</a></li>
+               <li><a href="/view">View</a></li>
+               <li><a href="/search">Search</a></li>
+               <li><a href="/Trending">Trending</a></li>
+               <li><a href="/social">Social</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+         <div class="clear"></div>
+     </div>
+     <div class="clear"></div>
+    </div>
+  </section>
+</header>
+  <center>
+    <br><br>
+    <a href="{{ url|safe }}" style="color:white; font-size:300%;">{{ url_linktext }}</a>
+  </center>
+  </body>
+</html>
+{% endautoescape %}
