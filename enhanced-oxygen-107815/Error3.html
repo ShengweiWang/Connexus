@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 {% autoescape true %}
-
 <html lang="en">
 <head>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="" id="top">
-
+<!--==============================
+              header
+=================================-->
 <header>
   <div class="container_12">
     <div class="grid_12">
@@ -24,7 +25,6 @@
   <!--==============================
               Stuck menu
   =================================-->
-
     <div class="container_12">
         <div class="grid_12">
           <div class="navigation">
@@ -46,9 +46,13 @@
     </div>
   </section>
 </header>
+
+</body>
+  <body>
   <center>
-    <br><br>
-    <a href="{{ url|safe }}" style="color:white; font-size:300%;">{{ url_linktext }}</a>
+
+  <div style="color:white">Error: Stream should have a name</div><br>
+
   </center>
   </body>
 </html>

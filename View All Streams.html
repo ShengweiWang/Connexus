@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+{% autoescape true %}
 <html lang="en">
 <title>Connexus</title>
 <head>
@@ -33,8 +33,8 @@
             <nav>
               <ul class="sf-menu">
                <li><a href="/manage">Manage</a></li>
-               <li class="current"><a href="/createstream">Create</a></li>
-               <li><a href="/view">View</a></li>
+               <li><a href="/createstream">Create</a></li>
+               <li class="current"><a href="/view">View</a></li>
                <li><a href="/search">Search</a></li>
                <li><a href="/Trending">Trending</a></li>
                <li><a href="/social">Social</a></li>
@@ -50,7 +50,8 @@
 </header>
 
 </body>
-<!--------------------------------search--------------------------
+<!--
+<!--------------------------------search-------------------------
 <body><center>
     <form action="/search?search={{ search }}" method="get">
         <div><input id="searchnames" type="text" name="searchfield" style="width:500px" value=""></div>
@@ -61,45 +62,29 @@
     </form>
 </center></body>
 -->
-  <body>
     <br><hr><br>
 
-    <form action="/create?" method="post" style="color:white">
-        <table style="width:100%;border:0;">
-            <tr>
-                <td valign="bottom" style="border:0">
-                    <!--<textarea name="name" placeholder="lalal" rows="1" cols="60"></textarea>-->
+  <body>
+  <center>
 
-                    <form><input name="name" style="width: 500px"></form>
-                    <div>Name your stream</div>
-                </td>
-                <td>
-                     <form><input name="tag" style="width: 500px;height: 60px "></form>
-                     <div>Tag your stream</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <!--
-                     <input name="subscriber" value="Add subscriber emails" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue; this.style.color='#999'}" style="width: 500px;height: 60px;color:#999"><br>
-                     <input name="invite_message" value="Add invite massage" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue; this.style.color='#999'}" style="width: 500px;height: 60px;color:#999">
-                     <div>Add subscriber</div>
-                     -->
-                </td>
-                <td valign="bottom">
-                    <br>
-                    <input name="coverImage" style="width: 500px;" value="http://vcartx.com/images/default.jpeg">
-                    <div>URL to cover image</div>
-                </td>
+  <div style="color:white;font-size: 150%">View All Streams</div><br>
+  <!--<table class="tblX" id="streams" style="color:white;border:0">-->
+    <!--<tr>-->
+        {%set count=0%}
+        {% for stream in allStream %}
+            {% if count!=3 %}
+                <a href ="/singlestream?curstream={{stream.key.id()}}" >&nbsp&nbsp&nbsp&nbsp&nbsp<img src="{{stream.coverImageUrl}}" width="200" height="200">&nbsp&nbsp&nbsp&nbsp&nbspx</a>
+                {%set count=count+1 %}
+            {% else %}
+                <a href ="/singlestream?curstream={{stream.key.id()}}" >&nbsp&nbsp&nbsp&nbsp&nbsp<img src="{{stream.coverImageUrl}}" width="200" height="200"></a><br><br><br>
+                {% set count=0 %}
+            {% endif %}
+        {% endfor %}
+    <!--</tr>-->
+  <!--</table>-->
+    <br><br><br><a style="color:blue" href="{{ url|safe }}">{{ url_linktext }}</a>
 
-
-            </tr>
-        </table>
-        <div align="center" ><input id="create" type="submit" value="Create stream"></div><br><br><br>
-    </form>
-
-    <a style="color:blue;position: absolute; top: 720px; left:730px;" href="{{ url|safe }}">{{ url_linktext }}</a>
-
+  </center>
   </body>
 <!--
 <script>
@@ -138,10 +123,7 @@
         }
     });
     });
-
-        $("#create").click(function(){
-        toastr.info('Stream Create Success!')
-    });
   </script>
-  -->
+-->
 </html>
+{% endautoescape %}

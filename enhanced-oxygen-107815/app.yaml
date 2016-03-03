@@ -1,0 +1,58 @@
+application: enhanced-oxygen-107815
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+
+- url: .*/viewAllPhotos
+  script: android.app
+
+- url: .*/view
+  script: Viewall.app
+
+- url: .*/singlestream
+  script: singlestream.app
+
+- url: .*/search
+  script: Search.app
+
+- url: .*/createstream
+  script: create.app
+
+- url: .*/error
+  script: Error.app
+
+- url: .*/error3
+  script: Error.app
+
+- url: .*/error4
+  script: Error.app
+
+- url: .*/social
+  script: Social.app
+
+- url: .*/Trending
+  script: Trending.app
+
+- url: .*/map
+  script: map.app
+
+- url: .*
+  script: manage.app
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
+- name: jinja2
+  version: latest
+- name: PIL
+  version: latest
+

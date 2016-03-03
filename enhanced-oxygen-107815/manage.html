@@ -48,9 +48,7 @@
 </header>
 
 </body>
-<body>
-<!---
-<center>
+<body><center>
     <form action="/search?search={{ search }}" method="get">
         <div><input id="searchnames" type="text" name="searchfield" style="width:500px" value=""></div>
         <table id= "sug" bgcolor="#FFFFFF" style="width:500px;border:1;text-align: left;">
@@ -58,16 +56,14 @@
         </table>
         <div><input id="search" type="submit" value="Search"></div>
     </form>
-</center>
-</body>
---->
+</center></body>
 <body>
     <br><hr><br>
 <center>
 
 <p align="center" style="color:white;font-size:150%">Stream I own</p>
 
-<form method="post" action="/delete?">
+<form method="post" action="/delete">
     <table style="width:50%;color:white" align="center">
         <!--<caption align="left">Stream I own</caption>-->
         <tr>
@@ -78,22 +74,21 @@
         </tr>
         {% for stream in own_stream %}
             <tr>
-            <td style="border:0;"> <a href ="/singlestream?streamId={{stream.key.id()}}" >{{stream.streamName}}</a></td>
-            <td>{{stream.lastTime}}</td>
-            <td>{{stream.picNum}}</td>
-            <td><input type="checkbox" name="delete" value = "{{stream.key.id()}}"> </td>
+            <td style="border:0;"> <a href ="/singlestream?stream_name={{stream.stream_id}}" >{{stream.stream_id}}</a></td>
+            <td>{{stream.last_add}}</td>
+            <td>{{stream.numberofpic}}</td>
+            <td><input type="checkbox" name="delete" value = "{{stream.stream_id}}"> </td>
             </tr>
         {% endfor %}
     </table>
-    <div><input id="delete" type="submit" value="Deleted Checked Streams"></div>
+    <div><input id="delete" type="submit" value="Deleted Checked"></div>
 </form>
 <br>
 <br>
-    <!--
 <p align="center" style="color:white;font-size:150%">Stream I subscribe to</p>
-<form method="post" action="/unsub?">
+<form method="post" action="/unsub">
     <table style="width:50%;color:white" align="center">
-        <!--<caption align="left">Stream I own</caption>-
+        <!--<caption align="left">Stream I own</caption>-->
         <tr>
         <th style="border:0;">Name</th>
         <th>Last New Pictures</th>
@@ -113,11 +108,9 @@
     </table>
     <div><input id="unsub" type="submit" value="Unsubscribe Checked Streams"></div>
 </form>
--->
     <br><br><br><a style="color:blue" href="{{ url|safe }}">{{ url_linktext }}</a>
 </center>
 </body>
-  <!--
   <script>
     var stname = '{{streamnames}}';
     stname.toString();
@@ -161,5 +154,4 @@
         toastr.info('Unsubscribe Streams Success!')
     });
   </script>
-  -->
 </html>

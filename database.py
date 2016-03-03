@@ -44,29 +44,36 @@ class Frequency(ndb.Model):
 
 
 class Imagedata(ndb.Model):
-     user_id = ndb.StringProperty()
-     blob_key= ndb.BlobKeyProperty()
+     name = ndb.StringProperty()   #name for image
+     blobKey = ndb.BlobKeyProperty() #blob key store
      comment = ndb.StringProperty()
-     date = ndb.DateTimeProperty(auto_now_add=True)
-     url = ndb.StringProperty()
-     stream_id = ndb.StringProperty()
-     name = ndb.StringProperty()
-     position=ndb.StringProperty()
+     createTime = ndb.DateTimeProperty(auto_now_add=True)
+     url = ndb.StringProperty()   #url, src=...
+     userId = ndb.StringProperty()  #userid, key
+     streamId = ndb.StringProperty()  #streamid, key
+     #position=ndb.StringProperty()
 
 class Stream(ndb.Model):
-    user_id = ndb.StringProperty()
-    user_email=ndb.StringProperty()
-    owner=ndb.StringProperty()
-    numberofpic = ndb.IntegerProperty()
-    last_add = ndb.StringProperty()
-    cover_key = ndb.BlobKeyProperty()  #ssss
-    cover_url = ndb.StringProperty()  #ssss
-    blob_key = ndb.BlobKeyProperty(repeated=True)
-    tags =  ndb.StringProperty(repeated=True)
-    stream_id = ndb.StringProperty()
-    create_time = ndb.DateTimeProperty(auto_now_add=True)  #change
-    invite_message = ndb.StringProperty()
-    view = ndb.DateTimeProperty(repeated=True)
-    numview = ndb.IntegerProperty()
-    subscriber= ndb.StringProperty()
-    view_in_hour = ndb.IntegerProperty()
+    streamName = ndb.StringProperty() #stream name
+    userId = ndb.StringProperty()
+    createTime = ndb.DateTimeProperty(auto_now_add=True)  #created timoe
+    lastTime = ndb.DateTimeProperty(auto_now_add=True)
+    tags = ndb.StringProperty(repeated=True)
+    picNum = ndb.IntegerProperty()
+    coverImageUrl = ndb.StringProperty()
+    #user_email = ndb.StringProperty()
+    #owner=ndb.StringProperty()
+
+
+    #last_add = ndb.StringProperty()
+    #cover_key = ndb.BlobKeyProperty()  #ssss
+    #cover_url = ndb.StringProperty()  #ssss
+    #blob_key = ndb.BlobKeyProperty(repeated=True)
+
+
+
+    #invite_message = ndb.StringProperty()
+    #view = ndb.DateTimeProperty(repeated=True)
+    #numview = ndb.IntegerProperty()
+    #subscriber= ndb.StringProperty()
+    #view_in_hour = ndb.IntegerProperty()

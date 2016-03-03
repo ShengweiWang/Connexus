@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-< lang="en">
+<html lang="en">
 <title>Connexus</title>
 <head>
-<link rel="stylesheet" href="css/style.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body class="" id="top">
 <!--==============================
@@ -26,99 +26,80 @@
               Stuck menu
   =================================-->
     <div class="container_12">
-        <div class="grid_12">          
+        <div class="grid_12">
           <div class="navigation">
             <nav>
               <ul class="sf-menu">
-               <li class="current"><a href="/manage">Manage</a></li>
+               <li><a href="/manage">Manage</a></li>
                <li><a href="/createstream">Create</a></li>
                <li><a href="/view">View</a></li>
                <li><a href="/search">Search</a></li>
-               <li><a href="/Trending">Trending</a></li>
+               <li class="current"><a href="/Trending">Trending</a></li>
                <li><a href="/social">Social</a></li>
              </ul>
             </nav>
             <div class="clear"></div>
-          </div>       
-         <div class="clear"></div>  
-     </div> 
+          </div>
+         <div class="clear"></div>
+     </div>
      <div class="clear"></div>
-    </div> 
+    </div>
   </section>
 </header>
-
 </body>
-<body>
-<!---
-<center>
+
+<!--------------------------------search--------------------------->
+<body><center>
     <form action="/search?search={{ search }}" method="get">
         <div><input id="searchnames" type="text" name="searchfield" style="width:500px" value=""></div>
         <table id= "sug" bgcolor="#FFFFFF" style="width:500px;border:1;text-align: left;">
-            <tbody style="color:black;font-family:'Arial';font-size: small"></tbody>
+            <tbody style="color:black;font-family:'Arial';font-size: small" ></tbody>
         </table>
         <div><input id="search" type="submit" value="Search"></div>
     </form>
-</center>
-</body>
---->
-<body>
+</center></body>
+
     <br><hr><br>
+<body>
 <center>
-
-<p align="center" style="color:white;font-size:150%">Stream I own</p>
-
-<form method="post" action="/delete?">
-    <table style="width:50%;color:white" align="center">
-        <!--<caption align="left">Stream I own</caption>-->
-        <tr>
-        <th style="border:0;">Name</th>
-        <th>Last New Pictures</th>
-        <th>Number of Pictures</th>
-        <th>Delete</th>
-        </tr>
-        {% for stream in own_stream %}
-            <tr>
-            <td style="border:0;"> <a href ="/singlestream?streamId={{stream.key.id()}}" >{{stream.streamName}}</a></td>
-            <td>{{stream.lastTime}}</td>
-            <td>{{stream.picNum}}</td>
-            <td><input type="checkbox" name="delete" value = "{{stream.key.id()}}"> </td>
-            </tr>
+<table class="tblX" id="streams" style="color:white;border:0">
+    <tr>
+        {% for stream in streams %}
+            <td style="border:0">&nbsp&nbsp&nbsp&nbsp<a href ="/singlestream?stream_name={{stream.stream_id}}" ><img src="{{stream.cover_url}}" width="200" height="200"></a>&nbsp&nbsp&nbsp&nbsp</td>
         {% endfor %}
-    </table>
-    <div><input id="delete" type="submit" value="Deleted Checked Streams"></div>
-</form>
-<br>
-<br>
-    <!--
-<p align="center" style="color:white;font-size:150%">Stream I subscribe to</p>
-<form method="post" action="/unsub?">
-    <table style="width:50%;color:white" align="center">
-        <!--<caption align="left">Stream I own</caption>-
-        <tr>
-        <th style="border:0;">Name</th>
-        <th>Last New Pictures</th>
-        <th>Number of Pictures</th>
-        <th>Views</th>
-        <th>Delete</th>
-        </tr>
-        {% for stream in sub_stream %}
-            <tr>
-            <td style="border:0;"> <a href ="/singlestream?stream_name={{stream.stream_id}}" >{{stream.stream_id}}</a></td>
-            <td>{{stream.last_add}}</td>
-            <td>{{stream.numberofpic}}</td>
-            <td>{{stream.numview}}</td>
-            <td><input type="checkbox" name="unsubscribe" value = "{{stream.stream_id}}"> <br></td>
-            </tr>
+        <td class="col2" style="padding-left:30px;color:white">
+        <form action="/radio" method="post">
+        <input id="report1" type="radio" name="freq" value="0">No reports<br>
+        <input id="report2" type="radio" name="freq" value="5">Every 5 minutes<br>
+        <input id="report3" type="radio" name="freq" value="60">Every 1 hour<br>
+        <input id="report4" type="radio" name="freq" value="1440">Every day<br>
+        <p>
+          <input id="report" type="submit" value="Update Rate">
+        </p>
+      </form>
+    </td>
+    </tr>
+    <tr>
+        {% for stream in streams %}
+            <td style="border:0"><div style="color:white">{{stream.stream_id}}</div></td>
         {% endfor %}
-    </table>
-    <div><input id="unsub" type="submit" value="Unsubscribe Checked Streams"></div>
-</form>
--->
+    </tr>
+    <tr>
+        {% for stream in streams %}
+            <td style="border:0"><div style="color:white">{{stream.view_in_hour}} views</div></td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for stream in streams %}
+            <td style="border:0"><div style="color:white">in past hour</div></td>
+        {% endfor %}
+    </tr>
+</table>
     <br><br><br><a style="color:blue" href="{{ url|safe }}">{{ url_linktext }}</a>
-</center>
+</center>>
 </body>
-  <!--
-  <script>
+
+<script>
     var stname = '{{streamnames}}';
     stname.toString();
     var st1=stname.split('[').join("");
@@ -127,7 +108,7 @@
     var streamname=st3.split(',');
     var text;
     var i;
-    var ent;
+     var ent;
     var patt;
     $("#searchnames").keyup(function(){
         $("#sug > tbody").empty();
@@ -154,12 +135,11 @@
         }
     });
     });
-          $("#delete").click(function(){
-        toastr.info('Delete Streams Success!')
-    });
-          $("#unsub").click(function(){
-        toastr.info('Unsubscribe Streams Success!')
+
+        $("#report").click(function(){
+        toastr.info('Mail Report Change Success!')
     });
   </script>
-  -->
+
 </html>
+

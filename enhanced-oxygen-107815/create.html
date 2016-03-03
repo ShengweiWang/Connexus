@@ -50,7 +50,7 @@
 </header>
 
 </body>
-<!--------------------------------search--------------------------
+<!--------------------------------search--------------------------->
 <body><center>
     <form action="/search?search={{ search }}" method="get">
         <div><input id="searchnames" type="text" name="searchfield" style="width:500px" value=""></div>
@@ -60,16 +60,14 @@
         <div><input id="search" type="submit" value="Search"></div>
     </form>
 </center></body>
--->
+
   <body>
     <br><hr><br>
-
-    <form action="/create?" method="post" style="color:white">
+    <form action="/createstreamsign?" method="post" style="color:white">
         <table style="width:100%;border:0;">
             <tr>
                 <td valign="bottom" style="border:0">
                     <!--<textarea name="name" placeholder="lalal" rows="1" cols="60"></textarea>-->
-
                     <form><input name="name" style="width: 500px"></form>
                     <div>Name your stream</div>
                 </td>
@@ -80,28 +78,25 @@
             </tr>
             <tr>
                 <td>
-                    <!--
                      <input name="subscriber" value="Add subscriber emails" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue; this.style.color='#999'}" style="width: 500px;height: 60px;color:#999"><br>
                      <input name="invite_message" value="Add invite massage" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue; this.style.color='#999'}" style="width: 500px;height: 60px;color:#999">
                      <div>Add subscriber</div>
-                     -->
                 </td>
                 <td valign="bottom">
                     <br>
-                    <input name="coverImage" style="width: 500px;" value="http://vcartx.com/images/default.jpeg">
+                    <form><input name="cover_image" style="width: 500px;"></form>
                     <div>URL to cover image</div>
                 </td>
-
-
             </tr>
         </table>
+
         <div align="center" ><input id="create" type="submit" value="Create stream"></div><br><br><br>
     </form>
 
-    <a style="color:blue;position: absolute; top: 720px; left:730px;" href="{{ url|safe }}">{{ url_linktext }}</a>
+
+    <br><br><br><a style="color:blue;position: absolute; top: 720px; left:730px;" href="{{ url|safe }}">{{ url_linktext }}</a>
 
   </body>
-<!--
 <script>
     var stname = '{{streamnames}}';
     stname.toString();
@@ -143,5 +138,4 @@
         toastr.info('Stream Create Success!')
     });
   </script>
-  -->
 </html>

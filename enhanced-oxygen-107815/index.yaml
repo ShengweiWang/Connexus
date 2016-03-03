@@ -16,14 +16,31 @@ indexes:
   - name: date
     direction: desc
 
-- kind: Stream
+- kind: imagedata
   properties:
-  - name: user_id
-  - name: create_time
+  - name: stream_id
+  - name: date
+
+- kind: imagedata
+  properties:
+  - name: stream_id
+  - name: date
+    direction: desc
+
+- kind: imagedata
+  ancestor: yes
+  properties:
+  - name: date
     direction: desc
 
 - kind: stream
   properties:
   - name: user_id
   - name: create_time
+    direction: desc
+
+- kind: stream_info
+  ancestor: yes
+  properties:
+  - name: date
     direction: desc

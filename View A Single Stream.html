@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-< lang="en">
+<!-- {% autoescape true %} -->
+<html lang="en">
 <title>Connexus</title>
 <head>
-<link rel="stylesheet" href="css/style.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link href="css/lightbox.css" rel="stylesheet">
+    <script src="js/lightbox.js"></script>
+        <link href="css/toastr.css" rel="stylesheet"/>
+<script src="js/toastr.js"></script>
 </head>
+
 <body class="" id="top">
 <!--==============================
               header
@@ -30,9 +36,9 @@
           <div class="navigation">
             <nav>
               <ul class="sf-menu">
-               <li class="current"><a href="/manage">Manage</a></li>
+               <li><a href="/manage">Manage</a></li>
                <li><a href="/createstream">Create</a></li>
-               <li><a href="/view">View</a></li>
+               <li class="current"><a href="/view">View</a></li>
                <li><a href="/search">Search</a></li>
                <li><a href="/Trending">Trending</a></li>
                <li><a href="/social">Social</a></li>
@@ -48,77 +54,58 @@
 </header>
 
 </body>
-<body>
-<!---
-<center>
+<!--------------------------------search-------------------------
+<body><center>
     <form action="/search?search={{ search }}" method="get">
         <div><input id="searchnames" type="text" name="searchfield" style="width:500px" value=""></div>
         <table id= "sug" bgcolor="#FFFFFF" style="width:500px;border:1;text-align: left;">
-            <tbody style="color:black;font-family:'Arial';font-size: small"></tbody>
+            <tbody style="color:black;font-family:'Arial';font-size: small" ></tbody>
         </table>
         <div><input id="search" type="submit" value="Search"></div>
     </form>
-</center>
-</body>
---->
-<body>
-    <br><hr><br>
-<center>
-
-<p align="center" style="color:white;font-size:150%">Stream I own</p>
-
-<form method="post" action="/delete?">
-    <table style="width:50%;color:white" align="center">
-        <!--<caption align="left">Stream I own</caption>-->
-        <tr>
-        <th style="border:0;">Name</th>
-        <th>Last New Pictures</th>
-        <th>Number of Pictures</th>
-        <th>Delete</th>
-        </tr>
-        {% for stream in own_stream %}
-            <tr>
-            <td style="border:0;"> <a href ="/singlestream?streamId={{stream.key.id()}}" >{{stream.streamName}}</a></td>
-            <td>{{stream.lastTime}}</td>
-            <td>{{stream.picNum}}</td>
-            <td><input type="checkbox" name="delete" value = "{{stream.key.id()}}"> </td>
-            </tr>
-        {% endfor %}
-    </table>
-    <div><input id="delete" type="submit" value="Deleted Checked Streams"></div>
-</form>
-<br>
-<br>
-    <!--
-<p align="center" style="color:white;font-size:150%">Stream I subscribe to</p>
-<form method="post" action="/unsub?">
-    <table style="width:50%;color:white" align="center">
-        <!--<caption align="left">Stream I own</caption>-
-        <tr>
-        <th style="border:0;">Name</th>
-        <th>Last New Pictures</th>
-        <th>Number of Pictures</th>
-        <th>Views</th>
-        <th>Delete</th>
-        </tr>
-        {% for stream in sub_stream %}
-            <tr>
-            <td style="border:0;"> <a href ="/singlestream?stream_name={{stream.stream_id}}" >{{stream.stream_id}}</a></td>
-            <td>{{stream.last_add}}</td>
-            <td>{{stream.numberofpic}}</td>
-            <td>{{stream.numview}}</td>
-            <td><input type="checkbox" name="unsubscribe" value = "{{stream.stream_id}}"> <br></td>
-            </tr>
-        {% endfor %}
-    </table>
-    <div><input id="unsub" type="submit" value="Unsubscribe Checked Streams"></div>
-</form>
+</center></body>
 -->
+    <br><hr><br>
+  <center>
+      {{stream.stream_id}}
+    {%set count=0%}
+    {% for image in allimage %}
+        {% if count!=2 %}
+
+                <a href="{{image.url}}" data-lightbox="image-1">&nbsp&nbsp&nbsp&nbsp&nbsp<img src="{{image.url}}" width="200" height="200">&nbsp&nbsp&nbsp&nbsp&nbspx</a>
+                {%set count=count+1 %}
+        {% else %}
+                <a href="{{image.url}}" data-lightbox="image-1">&nbsp&nbsp&nbsp&nbsp&nbsp<img src="{{image.url}}" width="200" height="200">&nbsp&nbsp&nbsp&nbsp&nbspx</a><br><br><br>
+                {% set count=0 %}
+        {% endif %}
+    {% endfor %}
+
+    {% if more!='1'%}
+        <form action="/singlestream?stream_name={{ stream.stream_id }}&more=1" method="post" enctype="multipart/form-data" >
+            <br>
+            <div><input type="submit" value="More"></div>
+        </form>
+    {%endif%}
+
+
+      <form action="/map?stream_name={{ stream_name }}" method="post">
+            <br>
+            <div><input type="submit" value="GeoView"></div>
+        </form>
+
+    <form action="/subscribe?stream_name={{ stream_name }}" method="post" enctype="multipart/form-data" >
+        <br>
+        <div><input id="sub" type="submit" value="Subscribe"></div>
+    </form>
+<!--defintion missing-->
+    <hr>
+    <script src="js/lightbox.js"></script>
+
     <br><br><br><a style="color:blue" href="{{ url|safe }}">{{ url_linktext }}</a>
-</center>
-</body>
-  <!--
-  <script>
+  </center>
+  </body>
+<!--
+<script>
     var stname = '{{streamnames}}';
     stname.toString();
     var st1=stname.split('[').join("");
@@ -127,7 +114,7 @@
     var streamname=st3.split(',');
     var text;
     var i;
-    var ent;
+     var ent;
     var patt;
     $("#searchnames").keyup(function(){
         $("#sug > tbody").empty();
@@ -154,12 +141,12 @@
         }
     });
     });
-          $("#delete").click(function(){
-        toastr.info('Delete Streams Success!')
+
+    $("#sub").click(function(){
+        toastr.info('Subscribe This Stream Success!')
     });
-          $("#unsub").click(function(){
-        toastr.info('Unsubscribe Streams Success!')
-    });
+
   </script>
   -->
 </html>
+<!-- {% endautoescape %} -->

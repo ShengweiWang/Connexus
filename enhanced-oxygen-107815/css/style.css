@@ -159,7 +159,7 @@ table, th, td {
     border-collapse: collapse;
     text-align: center;
 }
-
+input,
 textarea {
   border-radius: 0 !important;
   outline: none !important;

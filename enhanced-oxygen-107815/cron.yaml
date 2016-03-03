@@ -1,0 +1,12 @@
+cron:
+- description: email5
+  url: /email5
+  schedule: every 5 mins synchronized
+
+- description: email60
+  url: /email60
+  schedule: every 60 mins synchronized
+
+- description: email1440
+  url: /email1440
+  schedule: every 1440 mins synchronized
